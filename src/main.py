@@ -5,17 +5,15 @@ from textnode import (
       text_type_image,
       text_type_italic,
       text_type_link,
-      text_type_text
+      text_type_text,
       )
-from htmlnode import HTMLNode, LeafNode
+from htmlnode import HTMLNode, LeafNode, ParentNode
+from inline_markdown import split_nodes_delimiter
 
 def main():
-      a = TextNode("This is a text node", "bold", "https://www.boot.dev")
-      b = TextNode("This is a text node", "bold", "https:/s/www.boot.dev")
-      node2 = HTMLNode("h1","This is a header", [], {"href": "https://www.google.com", "target": "_blank"})
-      leaf = LeafNode("h1","This is a header")
-      print(a) 
-      print(b) 
-      print(node2)
-      print(leaf.to_html())
+      node = TextNode("This is text with a `code block` word", text_type_text)
+      new_nodes = split_nodes_delimiter([node], "`", text_type_code)
+      print(new_nodes)
+
+
 main()
