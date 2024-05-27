@@ -1,5 +1,5 @@
 import re
-from textnode import (
+from src.textnode import (
       TextNode, 
       text_type_bold,
       text_type_code,
@@ -11,7 +11,7 @@ from textnode import (
 
 #BOLD: **x**
 #ITALICS: *x*
-#CODE: ```x```
+#CODE: `x`
 def split_nodes_delimiter(old_nodes, delimiter, text_type):
       new_nodes = []
       for old_node in old_nodes:
@@ -46,12 +46,12 @@ def split_nodes_image(old_nodes):
                   if len(section) != 2:
                         raise ValueError("Invalid markdown, image section not closed")
                   if section[0] != "":
-                        new_nodes.append(TextNode(section[0]), text_type_text)
+                        new_nodes.append(TextNode(section[0], text_type_text))
                   new_nodes.append(TextNode(image[0], text_type_image, image[1]))
                   original_text = section[1]
             if original_text != "":
                   new_nodes.append(TextNode(original_text, text_type_text))
-            return new_nodes
+      return new_nodes
 
             
 
@@ -76,12 +76,20 @@ def split_nodes_link(old_nodes):
                   original_text = section[1]
             if original_text != "":
                   new_nodes.append(TextNode(original_text, text_type_text))
-            return new_nodes
-
-       
+      return new_nodes
 
 def extract_markdown_images(text):
       return re.findall(r"!\[(.*?)\]\((.*?)\)", text)
 
 def extract_markdown_links(text):
       return re.findall(r"\[(.*?)\]\((.*?)\)", text)
+
+
+def text_to_textnodes(text):
+      new_nodes = TextNode(text, text_type_text)
+      new_nodes = split_nodes_delimiter([new_nodes], "**", text_type_bold)
+      new_nodes = split_nodes_delimiter(new_nodes, "`", text_type_code)
+      new_nodes = split_nodes_delimiter(new_nodes, "*", text_type_italic)
+      new_nodes = split_nodes_image(new_nodes)
+      new_nodes = split_nodes_link(new_nodes)
+      return new_nodes
