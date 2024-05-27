@@ -1,5 +1,5 @@
 import re
-from src.textnode import (
+from textnode import (
       TextNode, 
       text_type_bold,
       text_type_code,
