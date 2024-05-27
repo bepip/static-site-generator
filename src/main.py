@@ -13,9 +13,32 @@ from block_to_html import (
     quote_to_html,
     paragraph_to_html,
     ordered_list_to_html,
-    unordered_list_to_html,     
+    unordered_list_to_html,
+    markdown_to_html_node
 )
 def main():
-    new_node1 = quote_to_html("> Hello\n> this is a quote.")
-    print(new_node1)
+    mk = """### Hello World this is a header
+
+``` there is some code in here
+```
+
+* UL first item
+* second item
+
+> some quote lol
+> coucou
+
+1. OL first item
+2. OL second item
+
+bjuasdbjidjbdsabjdsajbsda paragraph gaming
+iaskidasd
+asdksadasd
+asdsa
+dsa
+das
+dasd
+asdasda
+"""
+    print(markdown_to_html_node(mk))
 main()
