@@ -3,21 +3,21 @@ import shutil
 
 def copy_directory(source_path, dest_path):
     if os.path.exists(dest_path):
-        print("Deleting public directory...")
+        print(f"Deleting {dest_path} directory...")
         shutil.rmtree(dest_path)
     os.mkdir("public", mode = 0o777)
-    print("Copying static files to public directory...")
+    print(f"Copying {source_path} files to {dest_path} directory...")
     helper(source_path, dest_path)
 
 def helper(source_path, dest_path):
-    ls = os.listdir(source_path)
-    desination_path = dest_path + source_path.removeprefix("static/")
-    for item in ls:
+      if not os.path.exists(dest_path):
+          os.mkdir(dest_path)
+      ls = os.listdir(source_path)
+      for item in ls:
         item_path = f"{source_path}{item}"
         if os.path.isfile(item_path):
-            shutil.copy(item_path, desination_path)
-            print(f"{item} copied to {desination_path}")
+            shutil.copy(item_path, dest_path)
+            print(f"{item} copied to {dest_path}")
             pass
         else:
-            os.mkdir(desination_path+item, mode = 0o777)
-            helper(f"{item_path}/", desination_path)
+            helper(f"{item_path}/", dest_path+item+"/")
