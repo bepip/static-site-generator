@@ -1,4 +1,4 @@
-from textnode import (
+from src.textnode import (
       TextNode, 
       text_type_bold,
       text_type_code,
@@ -7,8 +7,8 @@ from textnode import (
       text_type_link,
       text_type_text,
       )
-from htmlnode import HTMLNode, LeafNode, ParentNode
-from inline_markdown import split_nodes_delimiter
+from src.htmlnode import HTMLNode, LeafNode, ParentNode
+from src.inline_markdown import split_nodes_delimiter
 
 def main():
     node = TextNode("This is text with a `code block` word", text_type_text)
