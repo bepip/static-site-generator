@@ -16,29 +16,10 @@ from block_to_html import (
     unordered_list_to_html,
     markdown_to_html_node
 )
+
+def copy():
+    pass
+
 def main():
-    mk = """### Hello World this is a header
-
-``` there is some code in here
-```
-
-* UL first item
-* second item
-
-> some quote lol
-> coucou
-
-1. OL first item
-2. OL second item
-
-bjuasdbjidjbdsabjdsajbsda paragraph gaming
-iaskidasd
-asdksadasd
-asdsa
-dsa
-das
-dasd
-asdasda
-"""
-    print(markdown_to_html_node(mk))
+    pass
 main()
